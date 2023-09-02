@@ -15,6 +15,9 @@ rev : List A → List A
 rev [] = []
 rev (x ∷ xs) = snoc (rev xs) x
 
+snoca-revL≡consa-revL : ∀ (L : List A) -> ∀ (a : A) -> rev (snoc L a) ≡ a ∷ (rev L)
+snoca-revL≡consa-revL = ?
+
 rev∘rev≡id : ∀ (L : List A) → rev (rev L) ≡ L
 rev∘rev≡id [] = refl
 rev∘rev≡id (x ∷ xs) = ?

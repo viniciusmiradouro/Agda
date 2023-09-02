@@ -5,32 +5,24 @@ open Eq using (_≡_; refl; cong; sym)
 open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; step-≡; _∎)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
 
-+-left-netural : ∀ (n : ℕ) -> (0 + n) ≡ n
-+-left-netural _ = refl
-+-left-netural (suc n) = cong suc (+-left-netural n)
++-neturalˡ : ∀ (n : ℕ) -> (0 + n) ≡ n
++-neturalˡ _ = refl
++-neturalˡ (suc n) = cong suc (+-neturalˡ n)
 
-+-right-netural : ∀ (n : ℕ) -> (n + 0) ≡ n
-+-right-netural 0 = refl
-+-right-netural (suc n) = cong suc (+-right-netural n)
++-neturalʳ : ∀ (n : ℕ) -> (n + 0) ≡ n
++-neturalʳ 0 = refl
++-neturalʳ (suc n) = cong suc (+-neturalʳ n)
 
-n+succm≡succ-m+n : ∀ (m n : ℕ) -> m + (suc n) ≡ suc (m + n)
-n+succm≡succ-m+n 0 _ = refl
-n+succm≡succ-m+n (suc n) m = cong suc (n+succm≡succ-m+n n m)
-
-postulate
-  +-lemma₂ : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
-
-n+succm≡succn+m : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
-n+succm≡succn+m zero zero = refl
-n+succm≡succn+m zero (suc n) = ?
-n+succm≡succn+m (suc m) n = ?
++-suc : ∀ (m n : ℕ) -> m + (suc n) ≡ suc (m + n)
++-suc 0 _ = refl
++-suc (suc n) m = cong suc (+-suc n m)
 
 +-comm : ∀ (m n : ℕ) -> (m + n) ≡ (n + m)
-+-comm m 0 = +-right-netural m
++-comm m 0 = +-neturalʳ m
 +-comm m (suc n) =
   begin
     m + suc n
-  ≡⟨ +-lemma₂ m n ⟩
+  ≡⟨ +-suc m n ⟩
     suc (m + n)
   ≡⟨ cong suc (+-comm m n) ⟩
     suc (n + m)
@@ -39,23 +31,5 @@ n+succm≡succn+m (suc m) n = ?
   ∎
 
 +-assoc : ∀ (m n o : ℕ) -> (m + n) + o ≡ m + (n + o)
-+-assoc 0 n o =
-  begin
-    (0 + n) + o
-  ≡⟨⟩
-    n + o
-  ≡⟨⟩
-    0 + (n + o)
-  ∎
-+-assoc (suc m) n o =
-  begin
-    (suc m + n) + o
-  ≡⟨⟩
-    suc (m + n) + o
-  ≡⟨⟩
-    suc ((m + n) + o)
-  ≡⟨ cong suc (+-assoc m n o) ⟩
-    suc (m + (n + o))
-  ≡⟨⟩
-    suc m + (n + o)
-  ∎
++-assoc 0 n o = refl
++-assoc (suc m) n o = cong suc (+-assoc m n o)
