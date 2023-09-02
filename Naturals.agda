@@ -20,10 +20,10 @@ n+succm≡succ-m+n (suc n) m = cong suc (n+succm≡succ-m+n n m)
 postulate
   +-lemma₂ : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
 
-n+succm≡succ+m : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
-n+succm≡succ+m zero zero = refl
-n+succm≡succ+m zero (suc n) = ?
-n+succm≡succ+m (suc m) n = ?
+n+succm≡succn+m : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
+n+succm≡succn+m zero zero = refl
+n+succm≡succn+m zero (suc n) = ?
+n+succm≡succn+m (suc m) n = ?
 
 +-comm : ∀ (m n : ℕ) -> (m + n) ≡ (n + m)
 +-comm m 0 = +-right-netural m
