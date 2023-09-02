@@ -8,6 +8,10 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
 +-left-netural : ∀ (n : ℕ) -> (0 + n) ≡ n
 +-left-netural _ = refl
 +-left-netural (suc n) = cong suc (+-left-netural n)
+
++-right-netural : ∀ (n : ℕ) -> (n + 0) ≡ n
++-right-netural 0 = refl
++-right-netural (suc n) = cong suc (+-right-netural n)
 postulate
   +-lemma₁ : ∀ (n : ℕ) -> (n + 0) ≡ n
   +-lemma₂ : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
