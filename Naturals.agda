@@ -5,6 +5,9 @@ open Eq using (_≡_; refl; cong; sym)
 open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; step-≡; _∎)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
 
++-left-netural : ∀ (n : ℕ) -> (0 + n) ≡ n
++-left-netural _ = refl
++-left-netural (suc n) = cong suc (+-left-netural n)
 postulate
   +-lemma₁ : ∀ (n : ℕ) -> (n + 0) ≡ n
   +-lemma₂ : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
