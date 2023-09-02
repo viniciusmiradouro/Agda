@@ -12,12 +12,21 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
 +-right-netural : ∀ (n : ℕ) -> (n + 0) ≡ n
 +-right-netural 0 = refl
 +-right-netural (suc n) = cong suc (+-right-netural n)
+
+n+succm≡succ-m+n : ∀ (m n : ℕ) -> m + (suc n) ≡ suc (m + n)
+n+succm≡succ-m+n 0 _ = refl
+n+succm≡succ-m+n (suc n) m = cong suc (n+succm≡succ-m+n n m)
+
 postulate
-  +-lemma₁ : ∀ (n : ℕ) -> (n + 0) ≡ n
   +-lemma₂ : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
 
+n+succm≡succ+m : ∀ (m n : ℕ) -> m + (suc n) ≡ (suc m) + n
+n+succm≡succ+m zero zero = refl
+n+succm≡succ+m zero (suc n) = ?
+n+succm≡succ+m (suc m) n = ?
+
 +-comm : ∀ (m n : ℕ) -> (m + n) ≡ (n + m)
-+-comm m 0 = +-lemma₁ m
++-comm m 0 = +-right-netural m
 +-comm m (suc n) =
   begin
     m + suc n
