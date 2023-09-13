@@ -45,3 +45,15 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
   ≡⟨⟩
     m + (n + p) + q
   ∎
+
++-swap : ∀ (m n p : ℕ) -> m + (n + p) ≡ n + (m + p)
++-swap m n p =
+  begin
+    m + (n + p)
+  ≡⟨ sym (+-assoc m n p) ⟩
+    (m + n) + p
+  ≡⟨ cong (_+ p) (+-comm m n) ⟩
+    (n + m) + p
+  ≡⟨ +-assoc n m p ⟩
+    n + (m + p)
+  ∎
