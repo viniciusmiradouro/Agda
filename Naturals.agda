@@ -57,3 +57,6 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
   ≡⟨ +-assoc n m p ⟩
     n + (m + p)
   ∎
+
+*-distrib-+ : ∀ (m n p : ℕ) -> (m + n) * p ≡ m * p + n * p
+*-distrib-+ = ?
