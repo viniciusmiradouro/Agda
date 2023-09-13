@@ -35,53 +35,39 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
 +-assoc (suc m) n o = cong suc (+-assoc m n o)
 
 +-rearrange : ∀ (m n p q : ℕ) → (m + n) + (p + q) ≡ m + (n + p) + q
-+-rearrange m n p q =
-  begin
-    (m + n) + (p + q)
-  ≡⟨ sym (+-assoc (m + n) p q) ⟩
-    ((m + n) + p) + q
-  ≡⟨ cong (_+ q) (+-assoc m n p) ⟩
-    (m + (n + p)) + q
-  ≡⟨⟩
-    m + (n + p) + q
-  ∎
++-rearrange m n p q = begin
+    (m + n) + (p + q) ≡⟨ sym (+-assoc (m + n) p q) ⟩
+    ((m + n) + p) + q ≡⟨ cong (_+ q) (+-assoc m n p) ⟩
+    (m + (n + p)) + q ≡⟨⟩
+    m + (n + p) + q   ∎
 
 +-swap : ∀ (m n p : ℕ) -> m + (n + p) ≡ n + (m + p)
-+-swap m n p =
-  begin
-    m + (n + p)
-  ≡⟨ sym (+-assoc m n p) ⟩
-    (m + n) + p
-  ≡⟨ cong (_+ p) (+-comm m n) ⟩
-    (n + m) + p
-  ≡⟨ +-assoc n m p ⟩
-    n + (m + p)
-  ∎
++-swap m n p = begin
+    m + (n + p) ≡⟨ sym (+-assoc m n p) ⟩
+    (m + n) + p ≡⟨ cong (_+ p) (+-comm m n) ⟩
+    (n + m) + p ≡⟨ +-assoc n m p ⟩
+    n + (m + p) ∎
 
 *-nullaryˡ : ∀ (n : ℕ) -> 0 * n ≡ 0
 *-nullaryˡ n = refl
 
 *-nullaryʳ : ∀ (n : ℕ) -> n * 0 ≡ 0
+*-nullaryʳ 0       = refl
 *-nullaryʳ (suc n) = *-nullaryʳ n
 
 *-neuturalˡ : ∀ (n : ℕ) -> 1 * n ≡ n
-*-neuturalˡ n =
-  begin
-    1 * n
-  ≡⟨⟩
-    n + (0 * n)
-  ≡⟨⟩
-    n + 0
-  ≡⟨ +-neturalʳ n ⟩
-    n
-  ∎
+*-neuturalˡ n = begin
+    1 * n       ≡⟨⟩
+    n + (0 * n) ≡⟨⟩
+    n + 0       ≡⟨ +-neturalʳ n ⟩
+    n           ∎
 
 *-neutralʳ : ∀ (n : ℕ) -> n * 1 ≡ n
 *-neutralʳ 0       = refl
-*-neutralʳ (suc n) =
-  begin
-    suc n * 1
-  ≡⟨ cong suc (*-neutralʳ n) ⟩
+*-neutralʳ (suc n) = begin
+    suc n * 1 ≡⟨ cong suc (*-neutralʳ n) ⟩
+    suc n     ∎
+
     suc n
   ∎
 
