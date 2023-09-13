@@ -64,5 +64,17 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
 *-nullaryʳ : ∀ (n : ℕ) -> n * 0 ≡ 0
 *-nullaryʳ (suc n) = *-nullaryʳ n
 
+*-neuturalˡ : ∀ (n : ℕ) -> 1 * n ≡ n
+*-neuturalˡ n =
+  begin
+    1 * n
+  ≡⟨⟩
+    n + (0 * n)
+  ≡⟨⟩
+    n + 0
+  ≡⟨ +-neturalʳ n ⟩
+    n
+  ∎
+
 *-distrib-+ : ∀ (m n p : ℕ) -> (m + n) * p ≡ m * p + n * p
 *-distrib-+ = ?
