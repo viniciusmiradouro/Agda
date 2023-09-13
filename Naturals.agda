@@ -80,5 +80,16 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
   suc (m + (n + m * n)) ≡⟨⟩
   suc m + suc m * n     ∎
 
+*-comm : ∀ (m n : ℕ) -> (m * n) ≡ (n * m)
+*-comm 0 n = sym (*-nullaryʳ n)
+*-comm (suc m) n = begin
+  suc m * n   ≡⟨⟩
+  n + (m * n) ≡⟨ cong (n +_) (*-comm m n) ⟩
+  n + (n * m) ≡⟨ sym (*-suc n m) ⟩
+  n * suc m   ∎
+
+*-assoc : ∀ (m n p : ℕ) -> (m * n) * p ≡ m * (n * p)
+*-assoc = ?
+
 *-distrib-+ : ∀ (m n p : ℕ) -> (m + n) * p ≡ m * p + n * p
 *-distrib-+ = ?
