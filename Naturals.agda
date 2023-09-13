@@ -68,8 +68,17 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
     suc n * 1 ≡⟨ cong suc (*-neutralʳ n) ⟩
     suc n     ∎
 
-    suc n
-  ∎
+*-suc : ∀ m n → m * suc n ≡ m + m * n
+*-suc zero    n = refl
+*-suc (suc m) n = begin
+  suc m * suc n         ≡⟨⟩
+  suc n + m * suc n     ≡⟨ cong (suc n +_) (*-suc m n) ⟩
+  suc n + (m + m * n)   ≡⟨⟩
+  suc (n + (m + m * n)) ≡⟨ cong suc (sym (+-assoc n m (m * n))) ⟩
+  suc (n + m + m * n)   ≡⟨ cong (λ x → suc (x + m * n)) (+-comm n m) ⟩
+  suc (m + n + m * n)   ≡⟨ cong suc (+-assoc m n (m * n)) ⟩
+  suc (m + (n + m * n)) ≡⟨⟩
+  suc m + suc m * n     ∎
 
 *-distrib-+ : ∀ (m n p : ℕ) -> (m + n) * p ≡ m * p + n * p
 *-distrib-+ = ?
