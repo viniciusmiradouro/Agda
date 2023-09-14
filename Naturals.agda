@@ -100,3 +100,7 @@ postulate
   n * p + (m * n) * p   ≡⟨ cong ((n * p) +_) (*-assoc m n p) ⟩
   n * p + m * (n * p)   ≡⟨⟩
   suc m * (n * p)       ∎
+
+data _≤_ : ℕ -> ℕ -> Set where
+  0≤n   : ∀ {n : ℕ} -> 0 ≤ n
+  sm≤sn : ∀ {m n : ℕ} -> m ≤ n -> suc m ≤ suc n
