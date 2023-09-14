@@ -19,16 +19,11 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
 
 +-comm : ∀ (m n : ℕ) -> (m + n) ≡ (n + m)
 +-comm m 0       = +-neturalʳ m
-+-comm m (suc n) =
-  begin
-    m + suc n
-  ≡⟨ +-suc m n ⟩
-    suc (m + n)
-  ≡⟨ cong suc (+-comm m n) ⟩
-    suc (n + m)
-  ≡⟨⟩
-    suc n + m
-  ∎
++-comm m (suc n) = begin
+    m + suc n   ≡⟨ +-suc m n ⟩
+    suc (m + n) ≡⟨ cong suc (+-comm m n) ⟩
+    suc (n + m) ≡⟨⟩
+    suc n + m   ∎
 
 +-assoc : ∀ (m n o : ℕ) -> (m + n) + o ≡ m + (n + o)
 +-assoc 0       n o = refl
@@ -88,9 +83,6 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
   n + (n * m) ≡⟨ sym (*-suc n m) ⟩
   n * suc m   ∎
 
-*-assoc : ∀ (m n p : ℕ) -> (m * n) * p ≡ m * (n * p)
-*-assoc = ?
-
 *-distribʳ-+ : ∀ (m n p : ℕ) -> (m + n) * p ≡ m * p + n * p
 *-distribʳ-+ 0 _ _        = refl
 *-distribʳ-+ (suc m) n p  = begin
@@ -100,3 +92,14 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
   p + (m * p + n * p)     ≡⟨ sym (+-assoc p (m * p) (n * p)) ⟩
   (p + m * p) + (n * p)   ≡⟨⟩
   (suc m * p) + (n * p)   ∎
+
+*-distribˡ-+ : ∀ (m n o : ℕ) -> m * (n + o) ≡ m * n + m * o
+*-distribˡ-+ m n o = begin
+  m * (n + o)   ≡⟨ *-comm m (n + o) ⟩
+  (n + o) * m   ≡⟨ *-distribʳ-+ n o m ⟩
+  n * m + o * m ≡⟨ cong (_+ (o * m)) (*-comm n m) ⟩
+  m * n + o * m ≡⟨ cong ((m * n) +_) (*-comm o m) ⟩
+  m * n + m * o ∎
+
+*-assoc : ∀ (m n p : ℕ) -> (m * n) * p ≡ m * (n * p)
+*-assoc = ?
