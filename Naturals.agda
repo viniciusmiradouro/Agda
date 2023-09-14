@@ -91,5 +91,12 @@ open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_;_^_)
 *-assoc : ∀ (m n p : ℕ) -> (m * n) * p ≡ m * (n * p)
 *-assoc = ?
 
-*-distrib-+ : ∀ (m n p : ℕ) -> (m + n) * p ≡ m * p + n * p
-*-distrib-+ = ?
+*-distribʳ-+ : ∀ (m n p : ℕ) -> (m + n) * p ≡ m * p + n * p
+*-distribʳ-+ 0 _ _        = refl
+*-distribʳ-+ (suc m) n p  = begin
+  (suc m + n) * p         ≡⟨⟩
+  suc (m + n) * p         ≡⟨⟩
+  p + ((m + n) * p)       ≡⟨ cong (p +_) (*-distribʳ-+ m n p) ⟩
+  p + (m * p + n * p)     ≡⟨ sym (+-assoc p (m * p) (n * p)) ⟩
+  (p + m * p) + (n * p)   ≡⟨⟩
+  (suc m * p) + (n * p)   ∎
