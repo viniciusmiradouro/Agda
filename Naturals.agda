@@ -109,3 +109,7 @@ infix 4 _≤_
 
 inv-m≤n : ∀ {m n : ℕ} -> suc m ≤ suc n -> m ≤ n
 inv-m≤n (sm≤sn m≤n) = m≤n
+
+≤-refl : ∀ {n : ℕ} -> n ≤ n
+≤-refl {0}     = 0≤n
+≤-refl {suc n} = sm≤sn ≤-refl
