@@ -104,3 +104,8 @@ postulate
 data _≤_ : ℕ -> ℕ -> Set where
   0≤n   : ∀ {n : ℕ} -> 0 ≤ n
   sm≤sn : ∀ {m n : ℕ} -> m ≤ n -> suc m ≤ suc n
+
+infix 4 _≤_
+
+inv-m≤n : ∀ {m n : ℕ} -> suc m ≤ suc n -> m ≤ n
+inv-m≤n (sm≤sn m≤n) = m≤n
