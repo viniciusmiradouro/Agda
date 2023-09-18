@@ -113,3 +113,7 @@ inv-m≤n (sm≤sn m≤n) = m≤n
 ≤-refl : ∀ {n : ℕ} -> n ≤ n
 ≤-refl {0}     = 0≤n
 ≤-refl {suc n} = sm≤sn ≤-refl
+
+≤-trans : ∀ {m n o : ℕ} -> m ≤ n -> n ≤ o -> m ≤ o
+≤-trans 0≤n         _           = 0≤n
+≤-trans (sm≤sn m≤n) (sm≤sn n≤o) = sm≤sn (≤-trans m≤n n≤o)
