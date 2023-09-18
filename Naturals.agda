@@ -121,3 +121,10 @@ inv-m≤n (sm≤sn m≤n) = m≤n
 ≤-antisym : ∀ {m n : ℕ} -> m ≤ n -> n ≤ m -> m ≡ n
 ≤-antisym 0≤n         0≤n         = refl
 ≤-antisym (sm≤sn m≤n) (sm≤sn n≤m) = cong suc (≤-antisym m≤n n≤m)
+
+data Total (m n : ℕ) : Set where
+  forward   : m ≤ n -> Total m n
+  flipped   : n ≤ m -> Total m n
+
+≤-total : ∀ {m n : ℕ} -> Total m n
+≤-total = ?
