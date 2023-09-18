@@ -117,3 +117,7 @@ inv-m≤n (sm≤sn m≤n) = m≤n
 ≤-trans : ∀ {m n o : ℕ} -> m ≤ n -> n ≤ o -> m ≤ o
 ≤-trans 0≤n         _           = 0≤n
 ≤-trans (sm≤sn m≤n) (sm≤sn n≤o) = sm≤sn (≤-trans m≤n n≤o)
+
+≤-antisym : ∀ {m n : ℕ} -> m ≤ n -> n ≤ m -> m ≡ n
+≤-antisym 0≤n         0≤n         = refl
+≤-antisym (sm≤sn m≤n) (sm≤sn n≤m) = cong suc (≤-antisym m≤n n≤m)
